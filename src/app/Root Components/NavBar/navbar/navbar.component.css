@@ -1,0 +1,23 @@
+.nav-link{
+    color: #ffffffdb;
+    font-family: Helvetica, sans-serif;
+}
+
+.nav-link:hover{
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.navbar-brand:hover{
+    cursor: pointer;
+}
+
+.logOut-btn{
+    border: none;
+    background: none;
+    color: #ffffffdb;
+}
+
+.logOut-btn:hover{
+    color: #ffffff;
+}

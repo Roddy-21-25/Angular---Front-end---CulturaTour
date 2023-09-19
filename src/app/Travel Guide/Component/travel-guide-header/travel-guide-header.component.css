@@ -1,0 +1,81 @@
+.box{
+    background-color: #ac9c8b;
+}
+
+.box-event{
+    background-color: #fff9f3;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 24px;
+}
+
+.color-brown{
+    color: #685e53;
+}
+
+.btn-get-country{
+    border: 3px solid #685e53;
+    border-radius: 24px;
+    background-color: #fff9f3;
+    padding: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-get-country:hover{
+    background-color: #685e53;
+    color: #fff9f3;
+    box-shadow: 0px 0px 6px #685e53;
+}
+
+.bi-arrow-right-square-fill{
+    margin-bottom: 4px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-get-country:hover .bi-arrow-right-square-fill{
+    margin-left: 30px;
+}
+
+.text-box{
+    background-color: #685e53;
+    border-radius: 10px;
+}
+
+.details-info{
+    color: #fff9f3;
+}
+
+.img-country{
+    width: auto;
+    height: 70px;
+    border-radius: 5px;
+}
+
+.box-root{
+    background-color: #fff9f3;
+}
+
+.museum-img{
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.address-box{
+    background-color: #685e53;
+    padding: 10px;
+    color: #fff9f3;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.312);
+    margin-top: 10px;
+}
+
+.cordinadas{
+    background-color: #fff9f3;
+    color: #685e53;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 5px;
+}

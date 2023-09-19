@@ -1,0 +1,10 @@
+.img-functions{
+    width: auto;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 0px 6px #000000; /* Configuración de la sombra */
+}
+
+.color-bronw{
+    color: #61584d;
+}

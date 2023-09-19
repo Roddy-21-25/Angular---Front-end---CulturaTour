@@ -1,0 +1,742 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="box">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+</div>
+
+<!-- Country Section -->
+<div class="container">
+  <div class="box-root">
+    <div class="row text-center">
+      <h1 class="mt-4 mb-3 color-brown">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+          />
+        </svg>
+        Explore and Discover Each Country
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+          />
+        </svg>
+      </h1>
+
+      <h5 class="mb-3 color-brown">
+        --- Find Detailed Country Information ---
+      </h5>
+      <div class="">
+        <img class="rounded m-3" src="/assets/Fecth/gif.gif" style="width: auto; height: 250px;" alt="">
+      </div>
+      <div class="">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="country"
+          placeholder="write the name of the Country...."
+          name="conuntryInput"
+        />
+      </div>
+      <div class="d-grid gap-2 mt-3">
+        <button
+          class="btn-get-country color-brown"
+          type="button"
+          (click)="
+            gerCountryDataMethod();
+            GetHistoricalEventsMethod();
+            getMuseumsInCanada()
+          "
+        >
+          Get Info
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-right-square-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="text-box" *ngIf="check">
+        <h2 class="text-center details-info mt-2">Details Info</h2>
+      </div>
+
+      <div class="" *ngIf="checkNavbar">
+        <h5 class="text-center color-brown">
+          Use this Navigation Bar for Show the info you wanna see
+        </h5>
+        <div class="d-flex justify-content-center pt-2 pb-2 text-box">
+          <button
+            class="btn-get-country color-brown ps-2 pe-2 ms-2"
+            (click)="scroll(country_data)"
+          >
+            Country Data
+          </button>
+          <button
+            class="btn-get-country color-brown ps-2 pe-2 me-2"
+            (click)="scroll(MuseumsList)"
+          >
+            Museums to visit
+          </button>
+          <button
+            class="btn-get-country color-brown ps-2 pe-2 me-2"
+            (click)="scroll(historical_events)"
+          >
+            Historical Events
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Img country-->
+<div
+  class="container"
+  *ngIf="country_dataCheck"
+  class="d-flex justify-content-center"
+>
+  <img class="img-country" src="/assets/Fecth/country.jpg" alt="" />
+</div>
+
+<!-- Img historical_events-->
+<div
+  class="container"
+  *ngIf="historical_eventsCheck"
+  class="d-flex justify-content-center mt-3"
+>
+  <img class="img-country" src="/assets/Fecth/history.jpg" alt="" />
+</div>
+
+<!-- Img MuseumsList-->
+<div
+  class="container"
+  *ngIf="Museums_eventsCheck"
+  class="d-flex justify-content-center mt-3"
+>
+  <img class="img-country" src="/assets/Fecth/Museums.jpg" alt="" />
+</div>
+
+<section id="country_data" #country_data>
+  <!-- Country Data -->
+  <div class="container" *ngIf="country_dataCheck">
+    <div *ngFor="let innerArray of countryList">
+      <h1 class="color-brown">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-hourglass-split"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"
+          />
+        </svg>
+        Country Data
+      </h1>
+      <div *ngFor="let item of innerArray">
+        <!--  -->
+        <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne"
+              >
+                🚩 <strong>{{ item.name }}</strong> 🚩
+              </button>
+            </h2>
+            <!-- Info -->
+            <div
+              id="flush-collapseOne"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <!-- Info -->
+              <div class="accordion-body">
+                <div class="root-box-accordeon">
+                  <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <!-- GDP information -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button
+                          class="accordion-button"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseOne"
+                          aria-expanded="true"
+                          aria-controls="panelsStayOpen-collapseOne"
+                        >
+                          🔢 <strong>GDP information</strong> 🔢
+                        </button>
+                      </h2>
+                      <div
+                        id="panelsStayOpen-collapseOne"
+                        class="accordion-collapse collapse show"
+                      >
+                        <div class="accordion-body">
+                          <div class="gdp">
+                            <h3>GDP information</h3>
+                            <table
+                              class="table table-striped table-hover table-bordered"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td>GDP</td>
+                                  <td>{{ item.gdp | json }} Millions</td>
+                                  <td>
+                                    is the total monetary or market value of all
+                                    the finished goods and services produced
+                                    within a country's borders in a specific
+                                    time period.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>GDP Per CAPITAL</td>
+                                  <td>
+                                    {{ item.gdp_per_capita | json }} Millions
+                                  </td>
+                                  <td>
+                                    is an economic measure that represents the
+                                    average income per person in a country,
+                                    calculated by dividing the total GDP by the
+                                    country's population.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>GDP Growth</td>
+                                  <td>+{{ item.gdp_growth | json }}%</td>
+                                  <td>
+                                    GDP growth refers to the increase in the
+                                    value of all goods and services produced in
+                                    a country over a specific period, usually a
+                                    year.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>GDP Pop</td>
+                                  <td>-{{ item.pop_growth | json }}%</td>
+                                  <td>
+                                    GDP decline, also known as economic
+                                    contraction, occurs when the value of all
+                                    goods and services produced in a country
+                                    decreases over a specific period, usually a
+                                    year.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Technique Information -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="panelsStayOpen-collapseTwo"
+                        >
+                          ⚙️ <strong>Technique Information</strong> ⚙️
+                        </button>
+                      </h2>
+                      <div
+                        id="panelsStayOpen-collapseTwo"
+                        class="accordion-collapse collapse"
+                      >
+                        <div class="accordion-body">
+                          <div class="tecnhical-info">
+                            <h3>Technique Information</h3>
+                            <table
+                              class="table table-striped table-hover table-bordered"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td>Capital</td>
+                                  <td>{{ item.capital | json }}</td>
+                                  <td>
+                                    is the city or locality designated as the
+                                    political and administrative center of that
+                                    country.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Region</td>
+                                  <td>{{ item.region | json }}</td>
+                                  <td>
+                                    se utiliza para agrupar estos países con
+                                    fines de análisis y comparación, ya que
+                                    comparten ciertas características que los
+                                    distinguen de otras regiones del mundo.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>ISO-2</td>
+                                  <td>{{ item.iso2 | json }}</td>
+                                  <td>
+                                    ISO 3166-1 alpha-2 (ISO 2) is an
+                                    international standard that defines
+                                    two-letter codes to represent the names of
+                                    countries and territorial dependencies.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Imports</td>
+                                  <td>{{ item.imports | json }} Millions</td>
+                                  <td>
+                                    refers to the total value of goods and
+                                    services that a country buys or receives
+                                    from other countries in a given period.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Currency Code</td>
+                                  <td>{{ item.currency.code | json }}</td>
+                                  <td>
+                                    is a special character or sign used to
+                                    represent a specific currency.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Currency Name</td>
+                                  <td>{{ item.currency.name | json }}</td>
+                                  <td>
+                                    is the name of the special character or sign
+                                    used to represent a specific currency of a
+                                    country.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Population Information -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseThree"
+                          aria-expanded="false"
+                          aria-controls="panelsStayOpen-collapseThree"
+                        >
+                          🧑‍🤝‍🧑 <strong>Population Information</strong> 🧑‍🤝‍🧑
+                        </button>
+                      </h2>
+                      <div
+                        id="panelsStayOpen-collapseThree"
+                        class="accordion-collapse collapse"
+                      >
+                        <div class="accordion-body">
+                          <div class="tecnhical-info">
+                            <h3>Population Information</h3>
+                            <table
+                              class="table table-striped table-hover table-bordered"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td>Population</td>
+                                  <td>{{ item.population | json }} Millions</td>
+                                  <td>
+                                    refers to the total number of people living
+                                    in that place at a specific time.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Urban Population</td>
+                                  <td>
+                                    {{ item.urban_population | json }} Millions
+                                  </td>
+                                  <td>
+                                    refers to people living in urban areas as
+                                    defined by national statistical offices.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Urban Population Growth</td>
+                                  <td>
+                                    {{ item.urban_population_growth | json }}%
+                                  </td>
+                                  <td>
+                                    occurs when there is a shift in population
+                                    from a rural setting to an urban one,
+                                    causing certain areas to become densely
+                                    populated.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Unemployment</td>
+                                  <td>
+                                    {{ item.unemployment | json }} Millions
+                                  </td>
+                                  <td>
+                                    refers to a situation where a person
+                                    actively searches for employment but is
+                                    unable to find work
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Homicide Rate</td>
+                                  <td>
+                                    {{ item.homicide_rate | json }} Millions or
+                                    K
+                                  </td>
+                                  <td>
+                                    is a statistical measurement that quantifies
+                                    the number of homicides (murders or unlawful
+                                    killings) that occur in a specific
+                                    population over a specified period of time,
+                                    usually expressed as a rate per 100,000
+                                    people.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Refugees</td>
+                                  <td>
+                                    {{ item.refugees | json }} Millions or K
+                                  </td>
+                                  <td>
+                                    a person who has been forced to leave their
+                                    country in order to escape war, persecution,
+                                    or natural disaster.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Infant Mortality</td>
+                                  <td>
+                                    {{ item.infant_mortality | json }} Millions
+                                    or K
+                                  </td>
+                                  <td>
+                                    is the death of an infant before his or her
+                                    first birthday.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Tourists</td>
+                                  <td>
+                                    {{ item.tourists | json }} Millions or K
+                                  </td>
+                                  <td>
+                                    a person who is travelling or visiting a
+                                    place for pleasure.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Exports</td>
+                                  <td>
+                                    {{ item.exports | json }} Millions or K
+                                  </td>
+                                  <td>
+                                    send (goods or services) to another country
+                                    for sale.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Internet Users</td>
+                                  <td>
+                                    {{ item.internet_users | json }} Millions or
+                                    K
+                                  </td>
+                                  <td>
+                                    are those who use the Internet from any
+                                    location.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Life Data -->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseFour"
+                          aria-expanded="false"
+                          aria-controls="panelsStayOpen-collapseFour"
+                        >
+                          🧬 <strong>Life Data</strong> 🧬
+                        </button>
+                      </h2>
+                      <div
+                        id="panelsStayOpen-collapseFour"
+                        class="accordion-collapse collapse"
+                      >
+                        <div class="accordion-body">
+                          <div class="tecnhical-info">
+                            <h3>Life Data</h3>
+                            <table
+                              class="table table-striped table-hover table-bordered"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td>Life Expectancy Male</td>
+                                  <td>
+                                    {{ item.life_expectancy_male | json }}
+                                  </td>
+                                  <td>
+                                    refers to the average number of years a male
+                                    individual in a specific population or
+                                    country is expected to live based on current
+                                    mortality rates and demographic factors.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Life Expectancy Female</td>
+                                  <td>
+                                    {{ item.life_expectancy_female | json }}
+                                  </td>
+                                  <td>
+                                    refers to the average number of years a
+                                    female individual in a specific population
+                                    or country is expected to live based on
+                                    current mortality rates and demographic
+                                    factors.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Post Secondary Enrollment Female</td>
+                                  <td>
+                                    {{
+                                      item.post_secondary_enrollment_female
+                                        | json
+                                    }}
+                                  </td>
+                                  <td>
+                                    refers to the percentage of female students
+                                    who are enrolled in post-secondary or higher
+                                    education institutions such as colleges,
+                                    universities, vocational schools, or other
+                                    tertiary education programs.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Post Secondary Enrollment Male</td>
+                                  <td>
+                                    {{
+                                      item.post_secondary_enrollment_male | json
+                                    }}
+                                  </td>
+                                  <td>
+                                    refers to the percentage of male students
+                                    who are enrolled in post-secondary or higher
+                                    education institutions such as colleges,
+                                    universities, vocational schools, or other
+                                    tertiary education programs.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Secondary School Enrollment Female</td>
+                                  <td>
+                                    {{
+                                      item.secondary_school_enrollment_female
+                                        | json
+                                    }}
+                                  </td>
+                                  <td>
+                                    refers to the percentage of female students
+                                    who are enrolled in secondary or high school
+                                    education.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Secondary School Enrollment Male</td>
+                                  <td>
+                                    {{
+                                      item.secondary_school_enrollment_male
+                                        | json
+                                    }}
+                                  </td>
+                                  <td>
+                                    refers to the percentage of male students
+                                    who are enrolled in secondary or high school
+                                    education.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Primary School Enrollment Female</td>
+                                  <td>
+                                    {{
+                                      item.primary_school_enrollment_female
+                                        | json
+                                    }}
+                                  </td>
+                                  <td>
+                                    refers to the percentage of female students
+                                    who are enrolled in primary or elementary
+                                    school education.
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Primary School Enrollment Male</td>
+                                  <td>
+                                    {{
+                                      item.primary_school_enrollment_male | json
+                                    }}
+                                  </td>
+                                  <td>
+                                    refers to the percentage of male students
+                                    who are enrolled in primary or elementary
+                                    school education.
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="MuseumsList" #MuseumsList>
+  <!-- MuseumsList -->
+  <div class="container" *ngIf="Museums_eventsCheck">
+    <div *ngFor="let item of MuseumsLins">
+      <h1 class="color-brown">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-bank2"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z"
+          />
+        </svg>
+        Museums To Visit:
+      </h1>
+      <div class="row">
+        <div *ngFor="let itemInside of item" class="col-6">
+          <div class="card m-1">
+            <div class="card-body">
+              <div class="d-flex justify-content-center">
+                <img
+                  [src]="itemInside.thumbnailUrl"
+                  class="museum-img"
+                  alt=""
+                />
+              </div>
+              <div>
+                <address class="address-box">
+                  <p class="text-center">
+                    <strong>{{ itemInside.title }}</strong>
+                  </p>
+                  <div class="cordinadas">
+                    <p>
+                      ➕ Address: <br />
+                      <strong>{{ itemInside.address }}</strong>
+                    </p>
+                  </div>
+                  <div class="cordinadas">
+                    <h6><strong>Coordinates: </strong></h6>
+                    <p>
+                      🔅 Lat: <strong>{{ itemInside.latitude }}</strong> <br />
+                      🔅 Long: <strong>{{ itemInside.longitude }}</strong>
+                    </p>
+                  </div>
+                  <p class="mt-3 text-center">
+                    ⭐ Rating: <strong>{{ itemInside.rating }}</strong> 📖
+                    Category:
+                    <strong>{{ itemInside.category }}</strong>
+                  </p>
+                </address>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="historical_events" #historical_events>
+  <!-- Historical Event -->
+  <div class="container" *ngIf="historical_eventsCheck">
+    <div *ngFor="let innerArray of HistoricalEventsList">
+      <h1 class="color-brown">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-hourglass-split"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"
+          />
+        </svg>
+        Historical Event
+      </h1>
+      <div class="row">
+        <div *ngFor="let item of innerArray" class="col-6">
+          <div class="card m-1">
+            <div class="card-body">
+              <div class="address-box m-2">
+                <p class="text-center">
+                  📅 Year: <strong>{{ item.year }}</strong> | Month:
+                  <strong>{{ item.month }}</strong> | Day:
+                  <strong>{{ item.day }}</strong> 📅 
+                </p>
+                <p class="cordinadas">{{ item.event | json }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Collapsible wrapper -->
+    <div class="navbar-collapse" id="navbarRightAlignExample">
+      <a class="navbar-brand" routerLink="/home" routerLinkActive="router-link-active" >
+        <img
+          src="/assets/Logo/Blanco.png"
+          height="40"
+          alt="Cultura Tour Logo"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="loginCheck">
+          <a class="nav-link" routerLink="/login" aria-current="page"
+            >login <span class="barra">/</span></a
+          >
+        </li>
+        <li class="nav-item" *ngIf="logOutCheck">
+          <a class="nav-link" routerLink="/login" aria-current="page"
+            ><button class="logOut-btn" (click)="logOut()">logOut</button> <span class="barra">/</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/travel" aria-current="page"
+            >Travel Guide <span class="barra">/</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" aria-current="page"
+            >About Cultura Tour <span class="barra">/</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/help" aria-current="page"
+            >Help <span class="barra">/</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" aria-current="page"
+            >Contact Info Of The Dev <span class="barra">/</span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

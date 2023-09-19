@@ -1,0 +1,85 @@
+/* Background Config */
+.background {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  background-image: url("/assets/MuseumBack/BACK\ \(1\).jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  animation: bgChange 20s linear infinite;
+  animation-duration: 180s;
+  margin-bottom: 25px;
+}
+
+@keyframes bgChange {
+  0% {
+    background-image: url("/assets/MuseumBack/BACK\ \(1\).jpeg");
+  }
+  20% {
+    background-image: url("/assets/MuseumBack/BACK\ \(1.5\).jpg");
+  }
+  40% {
+    background-image: url("/assets/MuseumBack/BACK\ \(3\).jpeg");
+  }
+  60% {
+    background-image: url("/assets/MuseumBack/BACK\ \(3.5\).jpg");
+  }
+  80% {
+    background-image: url("/assets/MuseumBack/BACK\ \(4\).jpeg");
+  }
+  100% {
+    background-image: url("/assets/MuseumBack/BACK\ \(5\).jpeg");
+  }
+}
+
+/* Text header (estilo base) */
+.header-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 70px;
+}
+
+/* Btn header */
+.btn-header {
+  position: absolute;
+  top: 91%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ffffff;
+  border-radius: 24px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.btn-header:hover{
+    background-color: #ffffff;
+    color: black;
+    box-shadow: 0 0px 6px #ffffff; /* Configuración de la sombra */
+}
+
+/* Media query para pantallas grandes (>= 1024px) */
+@media screen and (min-width: 1024px) {
+  .header-title {
+    font-size: 76px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .btn-header {
+    top: 80%;
+  }
+}
+
+/* Media query para pantallas medianas (>= 768px y < 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header-title {
+    font-size: 69px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
